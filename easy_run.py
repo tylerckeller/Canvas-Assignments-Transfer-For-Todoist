@@ -219,6 +219,23 @@ def create_todoist_projects():
         else:
             print(f"Project {courses_id_name_dict[course_id]} exists")
 
+def create_todoist_sections():
+    if "Coursework" not in todoist_project_dict:
+        project = todoist_api.add_project("Coursework")
+        print("Project Coursework created")
+        todoist_project_dict[project.name] = project.id
+    else:
+        print("Project Coursework exists")
+
+    for course_id in course_ids:
+        course_name = courses_id_name_dict[course_id]
+        if course_name not in todoist_api.get_sections(project_id=todoist_project_dict["Coursework"]):
+            section = todoist_api.add_section(name=course_name, project_id=todoist_project_dict["Coursework"])
+            print(f"Section {course_name} created in Coursework")
+        else:
+            print(f"Section {course_name} exists in Coursework")
+
+
 
 # Transfers over assignments from canvas over to Todoist, the method Checks
 # to make sure the assignment has not already been transferred to prevent overlap
