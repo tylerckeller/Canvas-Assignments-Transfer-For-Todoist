@@ -219,6 +219,9 @@ def create_todoist_projects():
         else:
             print(f"Project {courses_id_name_dict[course_id]} exists")
 
+# Checks to see if the user has a project named Coursework, if not, creates one
+# Then, checks if there are sections in Coursework that match the course names,
+# if not, makes them
 def create_todoist_sections():
     if "Coursework" not in todoist_project_dict:
         project = todoist_api.add_project("Coursework")
